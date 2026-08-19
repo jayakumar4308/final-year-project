@@ -1,24 +1,17 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Upload Resume | ResumeAI</title>
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <link rel="stylesheet" href="css/style.css">
 
     <style>
-
         .upload-page {
             min-height: 80vh;
             display: flex;
@@ -49,8 +42,6 @@
             line-height: 1.6;
         }
 
-        /* STUDENT DETAILS */
-
         .student-details {
             margin-bottom: 25px;
         }
@@ -74,6 +65,7 @@
             border-radius: 8px;
             outline: none;
             font-size: 15px;
+            box-sizing: border-box;
         }
 
         .form-group input:focus {
@@ -83,8 +75,6 @@
         .required {
             color: #ef4444;
         }
-
-        /* UPLOAD BOX */
 
         .upload-box {
             border: 2px dashed #2563eb;
@@ -129,8 +119,6 @@
             display: none;
         }
 
-        /* FILE INFO */
-
         .file-info {
             display: none;
             margin-top: 20px;
@@ -160,8 +148,6 @@
             cursor: pointer;
         }
 
-        /* ANALYZE */
-
         .analyze-btn {
             width: 100%;
             margin-top: 25px;
@@ -185,9 +171,8 @@
         .analyze-btn:disabled {
             cursor: not-allowed;
             opacity: 0.7;
+            pointer-events: none;
         }
-
-        /* MESSAGE */
 
         .message {
             margin-top: 15px;
@@ -205,10 +190,7 @@
             text-align: center;
         }
 
-        /* MOBILE */
-
         @media (max-width: 600px) {
-
             .upload-container {
                 padding: 25px;
             }
@@ -216,27 +198,17 @@
             .upload-container h1 {
                 font-size: 27px;
             }
-
         }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
 
 <header>
 
     <div class="logo">
         ResumeAI
     </div>
-
 
     <nav>
 
@@ -256,10 +228,7 @@
             Profile
         </a>
 
-        <a
-            href="admin-login.html"
-            class="admin-btn"
-        >
+        <a href="admin-login.html" class="admin-btn">
             Admin Login
         </a>
 
@@ -268,47 +237,31 @@
 </header>
 
 
-<!-- =====================================================
-     UPLOAD PAGE
-===================================================== -->
-
 <section class="upload-page">
 
     <div class="upload-container">
-
 
         <h1>
             Upload Your Resume
         </h1>
 
-
         <p class="upload-description">
-
             Enter your details and upload your resume.
             Our AI will analyze your skills and recommend
             suitable career opportunities.
-
         </p>
 
 
-        <!-- =================================================
-             STUDENT DETAILS
-        ================================================== -->
+        <!-- STUDENT DETAILS -->
 
         <div class="student-details">
-
-
-            <!-- NAME -->
 
             <div class="form-group">
 
                 <label for="studentName">
-
                     Student Name
                     <span class="required">*</span>
-
                 </label>
-
 
                 <input
                     type="text"
@@ -320,17 +273,12 @@
             </div>
 
 
-            <!-- EMAIL -->
-
             <div class="form-group">
 
                 <label for="studentEmail">
-
                     Student Email
                     <span class="required">*</span>
-
                 </label>
-
 
                 <input
                     type="email"
@@ -341,13 +289,10 @@
 
             </div>
 
-
         </div>
 
 
-        <!-- =================================================
-             UPLOAD BOX
-        ================================================== -->
+        <!-- UPLOAD BOX -->
 
         <div
             class="upload-box"
@@ -358,16 +303,13 @@
                 📄
             </div>
 
-
             <h3>
                 Drag & Drop your resume here
             </h3>
 
-
             <p>
                 or click below to select your file
             </p>
-
 
             <label
                 for="resumeFile"
@@ -376,13 +318,11 @@
                 Choose Resume
             </label>
 
-
             <input
                 type="file"
                 id="resumeFile"
-                accept=".pdf,.docx"
+                accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
             >
-
 
             <p>
                 Supported formats: PDF, DOCX | Maximum size: 5 MB
@@ -391,9 +331,7 @@
         </div>
 
 
-        <!-- =================================================
-             FILE INFORMATION
-        ================================================== -->
+        <!-- FILE INFORMATION -->
 
         <div
             class="file-info"
@@ -403,18 +341,14 @@
             <div class="file-row">
 
                 <div>
-
                     📎
-
                     <span
                         class="file-name"
                         id="fileName"
                     >
                         Resume.pdf
                     </span>
-
                 </div>
-
 
                 <button
                     type="button"
@@ -429,9 +363,7 @@
         </div>
 
 
-        <!-- =================================================
-             MESSAGE
-        ================================================== -->
+        <!-- MESSAGE -->
 
         <div
             class="message"
@@ -439,9 +371,7 @@
         ></div>
 
 
-        <!-- =================================================
-             ANALYZE BUTTON
-        ================================================== -->
+        <!-- ANALYZE BUTTON -->
 
         <button
             type="button"
@@ -459,15 +389,10 @@
             ← Back to Home
         </a>
 
-
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
 
 <footer>
 
@@ -479,6 +404,13 @@
 
 
 <script>
+
+// =========================================================
+// RENDER BACKEND API
+// =========================================================
+
+const API_URL =
+    "https://final-year-project-zxu5.onrender.com/analyze";
 
 
 // =========================================================
@@ -536,19 +468,13 @@ function checkForm() {
         fileSelected
     ) {
 
-        analyzeBtn.classList.add(
-            "active"
-        );
+        analyzeBtn.classList.add("active");
+
+    } else {
+
+        analyzeBtn.classList.remove("active");
 
     }
-    else {
-
-        analyzeBtn.classList.remove(
-            "active"
-        );
-
-    }
-
 }
 
 
@@ -560,7 +486,6 @@ studentName.addEventListener(
     "input",
     checkForm
 );
-
 
 studentEmail.addEventListener(
     "input",
@@ -641,32 +566,32 @@ uploadBox.addEventListener(
             event.dataTransfer.files[0];
 
 
-        if (file) {
-
-            try {
-
-                const dataTransfer =
-                    new DataTransfer();
-
-                dataTransfer.items.add(file);
-
-                resumeFile.files =
-                    dataTransfer.files;
-
-            }
-            catch (error) {
-
-                console.log(
-                    "Could not set dropped file:",
-                    error
-                );
-
-            }
+        if (!file) {
+            return;
+        }
 
 
-            handleFile(file);
+        try {
+
+            const dataTransfer =
+                new DataTransfer();
+
+            dataTransfer.items.add(file);
+
+            resumeFile.files =
+                dataTransfer.files;
+
+        } catch (error) {
+
+            console.log(
+                "Could not set dropped file:",
+                error
+            );
 
         }
+
+
+        handleFile(file);
 
     }
 );
@@ -678,7 +603,6 @@ uploadBox.addEventListener(
 
 function handleFile(file) {
 
-
     const allowedTypes = [
 
         "application/pdf",
@@ -688,12 +612,18 @@ function handleFile(file) {
     ];
 
 
-    // FILE TYPE
+    const extension =
+        file.name.toLowerCase();
+
+
+    const validExtension =
+        extension.endsWith(".pdf") ||
+        extension.endsWith(".docx");
+
 
     if (
-        !allowedTypes.includes(
-            file.type
-        )
+        !allowedTypes.includes(file.type) &&
+        !validExtension
     ) {
 
         message.textContent =
@@ -714,7 +644,9 @@ function handleFile(file) {
     }
 
 
+    // =====================================================
     // FILE SIZE
+    // =====================================================
 
     if (
         file.size >
@@ -739,7 +671,9 @@ function handleFile(file) {
     }
 
 
+    // =====================================================
     // VALID FILE
+    // =====================================================
 
     message.textContent =
         "Resume selected successfully.";
@@ -747,14 +681,11 @@ function handleFile(file) {
     message.style.color =
         "#16a34a";
 
-
     fileName.textContent =
         file.name;
 
-
     fileInfo.style.display =
         "block";
-
 
     checkForm();
 
@@ -792,11 +723,6 @@ analyzeBtn.addEventListener(
     "click",
     async function () {
 
-
-        // -------------------------------------------------
-        // STUDENT DETAILS
-        // -------------------------------------------------
-
         const name =
             studentName.value.trim();
 
@@ -804,9 +730,9 @@ analyzeBtn.addEventListener(
             studentEmail.value.trim();
 
 
-        // -------------------------------------------------
+        // =================================================
         // NAME VALIDATION
-        // -------------------------------------------------
+        // =================================================
 
         if (!name) {
 
@@ -823,9 +749,9 @@ analyzeBtn.addEventListener(
         }
 
 
-        // -------------------------------------------------
+        // =================================================
         // EMAIL VALIDATION
-        // -------------------------------------------------
+        // =================================================
 
         if (!email) {
 
@@ -841,10 +767,6 @@ analyzeBtn.addEventListener(
 
         }
 
-
-        // -------------------------------------------------
-        // EMAIL FORMAT
-        // -------------------------------------------------
 
         const emailPattern =
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -867,9 +789,9 @@ analyzeBtn.addEventListener(
         }
 
 
-        // -------------------------------------------------
+        // =================================================
         // FILE CHECK
-        // -------------------------------------------------
+        // =================================================
 
         if (
             !resumeFile.files ||
@@ -891,9 +813,9 @@ analyzeBtn.addEventListener(
             resumeFile.files[0];
 
 
-        // -------------------------------------------------
+        // =================================================
         // DISABLE BUTTON
-        // -------------------------------------------------
+        // =================================================
 
         analyzeBtn.disabled =
             true;
@@ -901,9 +823,8 @@ analyzeBtn.addEventListener(
         analyzeBtn.textContent =
             "⏳ Analyzing Resume...";
 
-
         message.textContent =
-            "Please wait while we analyze your resume...";
+            "Please wait while AI analyzes your resume...";
 
         message.style.color =
             "#2563eb";
@@ -916,18 +837,15 @@ analyzeBtn.addEventListener(
         const formData =
             new FormData();
 
-
-        formData.append(
-            "student_name",
-            name
-        );
-
-
-        formData.append(
-            "student_email",
-            email
-        );
-
+        /*
+         * FastAPI main.py expects:
+         *
+         * file: UploadFile = File(...)
+         *
+         * Extra student fields are not required
+         * by the current backend, but they can stay
+         * in FormData without causing a problem.
+         */
 
         formData.append(
             "file",
@@ -936,15 +854,14 @@ analyzeBtn.addEventListener(
 
 
         // =================================================
-        // SEND TO FASTAPI
+        // SEND TO RENDER FASTAPI
         // =================================================
 
         try {
 
-
             const response =
                 await fetch(
-                    "http://127.0.0.1:8000/analyze",
+                    API_URL,
                     {
                         method: "POST",
                         body: formData
@@ -952,17 +869,23 @@ analyzeBtn.addEventListener(
                 );
 
 
-            // -------------------------------------------------
-            // RESPONSE
-            // -------------------------------------------------
+            // =================================================
+            // READ RESPONSE
+            // =================================================
 
             const data =
                 await response.json();
 
 
-            // -------------------------------------------------
-            // ERROR
-            // -------------------------------------------------
+            console.log(
+                "Backend Response:",
+                data
+            );
+
+
+            // =================================================
+            // BACKEND ERROR
+            // =================================================
 
             if (!response.ok) {
 
@@ -974,9 +897,9 @@ analyzeBtn.addEventListener(
             }
 
 
-            // -------------------------------------------------
-            // CHECK DATA
-            // -------------------------------------------------
+            // =================================================
+            // CHECK RESPONSE
+            // =================================================
 
             if (
                 !data ||
@@ -1122,8 +1045,6 @@ analyzeBtn.addEventListener(
             );
 
 
-            // Keep latest 10
-
             recentResumes =
                 recentResumes.slice(
                     0,
@@ -1151,7 +1072,7 @@ analyzeBtn.addEventListener(
 
 
             // =================================================
-            // GO TO ANALYSIS
+            // GO TO ANALYSIS PAGE
             // =================================================
 
             setTimeout(
@@ -1165,9 +1086,7 @@ analyzeBtn.addEventListener(
             );
 
 
-        }
-        catch (error) {
-
+        } catch (error) {
 
             console.error(
                 "Resume Analysis Error:",
@@ -1179,14 +1098,12 @@ analyzeBtn.addEventListener(
                 "Unable to analyze resume: " +
                 error.message;
 
-
             message.style.color =
                 "#ef4444";
 
 
             analyzeBtn.disabled =
                 false;
-
 
             analyzeBtn.textContent =
                 "🚀 Analyze Resume";
@@ -1199,10 +1116,8 @@ analyzeBtn.addEventListener(
     }
 );
 
-
 </script>
 
-
 </body>
-
 </html>
+```
